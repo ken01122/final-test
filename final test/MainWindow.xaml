@@ -17,12 +17,31 @@
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="23" Margin="58,36,0,0" VerticalAlignment="Top" Width="280"/>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="323" Margin="10,86,0,0" VerticalAlignment="Top" Width="324">
             <TabItem Header="以教師分類課程">
-                <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="320" Margin="0,0,-2,-4"/>
+                <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="320" Margin="0,0,-2,-4">
+                    
+                </TreeView>
+
             </TabItem>
             <TabItem Header="所有課程列表">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="listView1" HorizontalAlignment="Left" Height="292" Margin="5,10,0,-6" VerticalAlignment="Top" Width="313">
+                        <ListView.View>
+                             <GridView>
+                                <GridViewColumn Header="任課教師" DisplayMemberBinding="{Binding Teacher}"/>
+                                <GridViewColumn Header="課程名稱" DisplayMemberBinding="{Binding CourseName}"/>
+                                <GridViewColumn Header="學分數" DisplayMemberBinding="{Binding CourseNum}"/>
+                                <GridViewColumn Header="選必修" DisplayMemberBinding="{Binding CourseMoN}"/>
+                                <GridViewColumn Header="開課班級" DisplayMemberBinding="{Binding CourseClass}"/>
+                                <GridViewColumn Header="上課時間" DisplayMemberBinding="{Binding CourseTime}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
             </TabItem>
         </TabControl>
         <Label x:Name="label" Content="學生" HorizontalAlignment="Left" Height="32" Margin="10,36,0,0" VerticalAlignment="Top" Width="48" FontSize="16"/>
+        <Button x:Name="selectbutton" Content="->" HorizontalAlignment="Left" Height="54" Margin="352,141,0,0" VerticalAlignment="Top" Width="67"/>
+        <Button x:Name="deletebutton" Content="&lt;-" HorizontalAlignment="Left" Height="54" Margin="352,219,0,0" VerticalAlignment="Top" Width="67"/>
+        <Button x:Name="savebutton" Content="存檔" HorizontalAlignment="Left" Height="54" Margin="352,306,0,0" VerticalAlignment="Top" Width="67"/>
     </Grid>
 </Window>
