@@ -40,6 +40,7 @@ namespace final_test
                 }
             }
             listView1.ItemsSource = courselist;
+            treeView.ItemsSource = courselist;
         }
 
     }
@@ -66,11 +67,11 @@ namespace final_test
         [Index(0)]
         public string Teacher { get; set; }
         [Index(1)]
-        public string CourseName { get; set; }
+        public ObservableCollection<course> CourseName { get; set; }
         [Index(2)]
-        public string CourseNum { get; set; }
+        public string Point { get; set; }
         [Index(3)]
-        public string CourseMoN { get; set; }
+        public string Type { get; set; }
         [Index(4)]
         public string CourseClass { get; set; }
         [Index(5)]
@@ -79,7 +80,7 @@ namespace final_test
 
         public override string ToString()
         {
-            return $"{ this.Teacher} { this.CourseName} { this.CourseNum} { this.CourseMoN}" +
+            return $"{ this.Teacher} { this.CourseName} { this.Point} { this.Type}" +
                 $"{ this.CourseClass} { this.CourseTime}";
         }
     }
