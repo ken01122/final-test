@@ -18,6 +18,7 @@ namespace final_test
         {
             List<student> studentlist = new List<student>();
             List<course> courselist = new List<course>();
+            List<teacher> teacherlist = new List<teacher>();
             InitializeComponent();
             using (var reader = new StreamReader("D:\\2B.csv",Encoding.Default))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -32,24 +33,34 @@ namespace final_test
 
             using (var reader = new StreamReader("D:\\course.csv", Encoding.Default))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
+            {                
                 var records = csv.GetRecords<course>();
                 foreach (var coursedata in records)
                 {
                     courselist.Add(coursedata);
+                  
                 }
+                
             }
             listView1.ItemsSource = courselist;
-            treeView.ItemsSource = courselist;
+            treeView.ItemsSource = teacherlist;
         }
 
     }
     
-    public class treenode 
-    {
-        public string titel { get; set; }
-        public ObservableCollection<treenode> Item { get; set; }
     
+    public class teacher
+    {
+        
+        public string TeacherName { get; set; }
+                
+        public ObservableCollection<course> TeacherCourse { get; set; } 
+        public teacher(string tn,course cn)
+        {            
+            
+        }
+
+
     }
     public class student
     {
@@ -67,7 +78,7 @@ namespace final_test
         [Index(0)]
         public string Teacher { get; set; }
         [Index(1)]
-        public ObservableCollection<course> CourseName { get; set; }
+        public string CourseName { get; set; }
         [Index(2)]
         public string Point { get; set; }
         [Index(3)]
@@ -76,8 +87,6 @@ namespace final_test
         public string CourseClass { get; set; }
         [Index(5)]
         public string CourseTime { get; set; }
-       
-
         public override string ToString()
         {
             return $"{ this.Teacher} { this.CourseName} { this.Point} { this.Type}" +

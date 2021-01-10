@@ -19,15 +19,15 @@
             <TabItem Header="以教師分類課程">
                 <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="318" VerticalAlignment="Top" Width="320" Margin="0,0,-2,0">
                     <TreeView.Resources>
-                        <HierarchicalDataTemplate DataType="{x:Type local:course}" ItemsSource="{Binding CourseName}" x:Key="course" >
+                        <HierarchicalDataTemplate DataType="{x:Type local:teacher}" ItemsSource="{Binding TeacherCourse}"  >
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Teacher}"/>
+                                <TextBlock Text="{Binding TeacherName}"/>
                                 <TextBlock Text="["/>
-                                <TextBlock Text="{Binding CourseName.Count}"/>
+                                <TextBlock Text="{Binding TeacherCourse.Count}"/>
                                 <TextBlock Text="]"/>
                             </StackPanel>                            
                         </HierarchicalDataTemplate>
-                        <DataTemplate DataType="">
+                        <DataTemplate DataType="course">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding CourseName}"/>
                                 <TextBlock Text="("/>
