@@ -5,46 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:final_test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="483.501" Width="800">
-    <Grid>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="323" Margin="435,110,0,0" VerticalAlignment="Top" Width="347">
+        Title="MainWindow" Height="663.501" Width="1052.375">
+    <Grid Margin="0,0,2,0">
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="461" Margin="604,103,0,0" VerticalAlignment="Top" Width="417">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="學號" />
+                    <GridViewColumn Header="學生姓名" />
+                    <GridViewColumn Header="授課教師" />
+                    <GridViewColumn Header="科目名稱" />
+                    <GridViewColumn Header="必選修" />
+                    <GridViewColumn Header="學分數" />
+                    <GridViewColumn Header="開課班級" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="23" Margin="58,36,0,0" VerticalAlignment="Top" Width="280"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="347" Margin="10,86,0,0" VerticalAlignment="Top" Width="324">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="23" Margin="58,36,0,0" VerticalAlignment="Top" Width="376"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="473" Margin="24,89,0,0" VerticalAlignment="Top" Width="425">
             <TabItem Header="以教師分類課程">
-                <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="318" VerticalAlignment="Top" Width="320" Margin="0,0,-2,0">
+                <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="445" VerticalAlignment="Top" Width="422" Margin="-1,0,-2,0" RenderTransformOrigin="0.5,0.5" SelectedItemChanged="treeView_SelectedItemChanged">
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type local:teacher}" ItemsSource="{Binding TeacherCourse}"  >
                             <StackPanel Orientation="Horizontal">
+                                <Image Source="teacher.png" Width="30" Height="30"/>
                                 <TextBlock Text="{Binding TeacherName}"/>
                                 <TextBlock Text="["/>
                                 <TextBlock Text="{Binding TeacherCourse.Count}"/>
                                 <TextBlock Text="]"/>
-                            </StackPanel>                            
+                            </StackPanel>
                         </HierarchicalDataTemplate>
-                        <DataTemplate DataType="course">
+                        <DataTemplate DataType="{x:Type local:courses}">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding CourseName}"/>
+                                <Image Source="study.png" Width="30" Height="30"/>
+                                <TextBlock Text="{Binding coursename}"/>
+                                <TextBlock Text="{Binding courseclass}"/>
                                 <TextBlock Text="("/>
-                                <TextBlock Text="{Binding Type}"/>
-                                <TextBlock Text="{Binding Point}"/>
+                                <TextBlock Text="{Binding type}"/>
+                                <TextBlock Text="{Binding point}"/>
                                 <TextBlock Text="學分)"/>
 
                             </StackPanel>
                         </DataTemplate>
 
                     </TreeView.Resources>
+                    <TreeView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.474"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TreeView.RenderTransform>
                 </TreeView>
 
             </TabItem>
             <TabItem Header="所有課程列表">
                 <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="listView1" HorizontalAlignment="Left" Height="292" Margin="5,10,0,-6" VerticalAlignment="Top" Width="313">
+                    <ListView x:Name="listView1" HorizontalAlignment="Left" Height="444" Margin="5,5,0,-3" VerticalAlignment="Top" Width="411">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="任課教師" DisplayMemberBinding="{Binding Teacher}"/>
@@ -60,8 +77,8 @@
             </TabItem>
         </TabControl>
         <Label x:Name="label" Content="學生" HorizontalAlignment="Left" Height="32" Margin="10,36,0,0" VerticalAlignment="Top" Width="48" FontSize="16"/>
-        <Button x:Name="selectbutton" Content="->" HorizontalAlignment="Left" Height="54" Margin="352,141,0,0" VerticalAlignment="Top" Width="67"/>
-        <Button x:Name="deletebutton" Content="&lt;-" HorizontalAlignment="Left" Height="54" Margin="352,219,0,0" VerticalAlignment="Top" Width="67"/>
-        <Button x:Name="savebutton" Content="存檔" HorizontalAlignment="Left" Height="54" Margin="352,306,0,0" VerticalAlignment="Top" Width="67"/>
-     </Grid>
+        <Button x:Name="selectbutton" Content="->" HorizontalAlignment="Left" Height="91" Margin="480,142,0,0" VerticalAlignment="Top" Width="92" Click="selectbutton_Click"/>
+        <Button x:Name="deletebutton" Content="&lt;-" HorizontalAlignment="Left" Height="89" Margin="483,273,0,0" VerticalAlignment="Top" Width="87"/>
+        <Button x:Name="savebutton" Content="存檔" HorizontalAlignment="Left" Height="105" Margin="482,410,0,0" VerticalAlignment="Top" Width="88"/>
+    </Grid>
 </Window>

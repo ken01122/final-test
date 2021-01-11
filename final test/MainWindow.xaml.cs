@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Runtime;
 
 namespace final_test
 {
@@ -14,11 +16,14 @@ namespace final_test
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             List<student> studentlist = new List<student>();
             List<course> courselist = new List<course>();
             List<teacher> teacherlist = new List<teacher>();
+            
+
             InitializeComponent();
             using (var reader = new StreamReader("D:\\2B.csv",Encoding.Default))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -30,7 +35,8 @@ namespace final_test
                 }
             }
             comboBox.ItemsSource = studentlist;
-
+            string sat= " ";
+            int i = -1;
             using (var reader = new StreamReader("D:\\course.csv", Encoding.Default))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {                
@@ -38,26 +44,64 @@ namespace final_test
                 foreach (var coursedata in records)
                 {
                     courselist.Add(coursedata);
-                  
+                    teacher treeset = new teacher();
+                    if(sat!=coursedata.Teacher)
+                    {
+                        sat = coursedata.Teacher;
+                        treeset.TeacherName = coursedata.Teacher;
+                        treeset.TeacherCourse.Add(new courses() { coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point});
+                        teacherlist.Add(treeset);
+                        i += 1;
+                    }
+                    else
+                    {
+                        teacherlist[i].TeacherCourse.Add(new courses() { coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point });
+                    }
+
                 }
                 
+
+
             }
             listView1.ItemsSource = courselist;
             treeView.ItemsSource = teacherlist;
+
+           
         }
 
+        private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
+
+        private void selectbutton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-    
-    
+
+
+    public class courses
+    {
+        public string coursename { get; set; }
+        public string courseclass { get; set; }
+        public string point { get; set; }
+        public string type { get; set; }
+        
+        
+       
+    }
+        
+
     public class teacher
     {
         
         public string TeacherName { get; set; }
-                
-        public ObservableCollection<course> TeacherCourse { get; set; } 
-        public teacher(string tn,course cn)
-        {            
-            
+        public ObservableCollection<courses> TeacherCourse { get; set; } 
+        public teacher()
+        {
+            TeacherCourse = new ObservableCollection<courses>();                       
+           
         }
 
 
