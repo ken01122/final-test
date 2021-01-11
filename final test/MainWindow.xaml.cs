@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Runtime;
+using System;
 
 namespace final_test
 {
@@ -22,7 +23,9 @@ namespace final_test
             List<student> studentlist = new List<student>();
             List<course> courselist = new List<course>();
             List<teacher> teacherlist = new List<teacher>();
-            
+           
+
+
 
             InitializeComponent();
             using (var reader = new StreamReader("D:\\2B.csv",Encoding.Default))
@@ -49,13 +52,13 @@ namespace final_test
                     {
                         sat = coursedata.Teacher;
                         treeset.TeacherName = coursedata.Teacher;
-                        treeset.TeacherCourse.Add(new courses() { coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point});
+                        treeset.TeacherCourse.Add(new courses() { tea=coursedata.Teacher,coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point});
                         teacherlist.Add(treeset);
                         i += 1;
                     }
                     else
                     {
-                        teacherlist[i].TeacherCourse.Add(new courses() { coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point });
+                        teacherlist[i].TeacherCourse.Add(new courses() { tea = coursedata.Teacher, coursename = coursedata.CourseName, courseclass = coursedata.CourseClass, type = coursedata.Type, point = coursedata.Point });
                     }
 
                 }
@@ -71,7 +74,10 @@ namespace final_test
 
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            label1.Content = "教師姓名:" + treeView.SelectedItem;
 
+
+        
         }
 
         private void selectbutton_Click(object sender, RoutedEventArgs e)
@@ -83,13 +89,16 @@ namespace final_test
 
     public class courses
     {
+        public string tea { get; set; }
         public string coursename { get; set; }
         public string courseclass { get; set; }
         public string point { get; set; }
         public string type { get; set; }
-        
-        
-       
+        public override string ToString()
+        {
+            return $"{this.tea} { this.coursename} {this.type} { this.point} {"學分"} {"開課班級:"}{ this.courseclass}";
+        }
+
     }
         
 
@@ -103,7 +112,10 @@ namespace final_test
             TeacherCourse = new ObservableCollection<courses>();                       
            
         }
-
+        public override string ToString()
+        {
+            return $"{ this.TeacherName} ";
+        }
 
     }
     public class student
@@ -133,8 +145,19 @@ namespace final_test
         public string CourseTime { get; set; }
         public override string ToString()
         {
-            return $"{ this.Teacher} { this.CourseName} { this.Point} { this.Type}" +
+            return $"{ this.Teacher} { this.CourseName}  { this.Point} { this.Type}" +
                 $"{ this.CourseClass} { this.CourseTime}";
         }
+    }
+    public class coursesel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Teacher { get; set; }
+        public string CourseName { get; set; }        
+        public string Point { get; set; }       
+        public string Type { get; set; }      
+        public string CourseClass { get; set; }
+
     }
 }
