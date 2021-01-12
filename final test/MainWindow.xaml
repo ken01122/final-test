@@ -10,7 +10,7 @@
         <ListView x:Name="listView" HorizontalAlignment="Left" Height="461" Margin="604,103,0,0" VerticalAlignment="Top" Width="417">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="學號" />
+                    <GridViewColumn Header="學號" DisplayMemberBinding="{Binding Teacher}" />
                     <GridViewColumn Header="學生姓名" />
                     <GridViewColumn Header="授課教師" />
                     <GridViewColumn Header="科目名稱" />

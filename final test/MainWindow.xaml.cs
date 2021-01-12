@@ -17,12 +17,14 @@ namespace final_test
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        List<coursesel> coursesellist = new List<coursesel>();
+        List<student> studentlist = new List<student>();
+        List<course> courselist = new List<course>();
+        List<teacher> teacherlist = new List<teacher>();
+
         public MainWindow()
         {
-            List<student> studentlist = new List<student>();
-            List<course> courselist = new List<course>();
-            List<teacher> teacherlist = new List<teacher>();
+            
            
 
 
@@ -75,14 +77,14 @@ namespace final_test
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             label1.Content = "教師姓名:" + treeView.SelectedItem;
-
+            
 
         
         }
 
         private void selectbutton_Click(object sender, RoutedEventArgs e)
-        {
-
+        {            
+           
         }
     }
 
@@ -118,7 +120,7 @@ namespace final_test
         }
 
     }
-    public class student
+     class student
     {
         [Index(0)]
         public string ID { get; set; }
@@ -129,7 +131,7 @@ namespace final_test
             return $"{ this.ID} { this.Name}";
         }
     }
-    public class course
+    class course
     {
         [Index(0)]
         public string Teacher { get; set; }
@@ -158,6 +160,7 @@ namespace final_test
         public string Point { get; set; }       
         public string Type { get; set; }      
         public string CourseClass { get; set; }
+        
 
     }
 }
