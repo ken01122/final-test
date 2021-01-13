@@ -82,8 +82,12 @@ namespace final_test
 
         private void selectbutton_Click(object sender, RoutedEventArgs e)
         {
-            NewMethod();
-            aaaaa();
+            if (teachernameclass.IsSelected)
+            { NewMethod(); }
+            if(allclass.IsSelected)
+            {aaaaa();}
+            
+            
         }
 
         private void aaaaa()
