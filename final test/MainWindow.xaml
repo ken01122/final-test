@@ -64,10 +64,22 @@
                     <ListView x:Name="listView1" HorizontalAlignment="Left" Height="444" Margin="5,5,-36,-3" VerticalAlignment="Top" Width="450" SelectionChanged="listView1_SelectionChanged">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="任課教師" DisplayMemberBinding="{Binding Teacher}"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding Teacher}" >
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="Teacher" Click="GridViewColumnHeader_Click">授科教師</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
                                 <GridViewColumn Header="課程名稱" DisplayMemberBinding="{Binding CourseName}"/>
-                                <GridViewColumn Header="學分數" DisplayMemberBinding="{Binding Point}"/>
-                                <GridViewColumn Header="選必修" DisplayMemberBinding="{Binding Type}"/>
+                                <GridViewColumn  DisplayMemberBinding="{Binding Point}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="Point" Click="GridViewColumnHeader_Click">學分數</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn  DisplayMemberBinding="{Binding Type}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Tag="Type" Click="GridViewColumnHeader_Click">必選修</GridViewColumnHeader>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
                                 <GridViewColumn Header="開課班級" DisplayMemberBinding="{Binding CourseClass}"/>
                                 <GridViewColumn Header="上課時間" DisplayMemberBinding="{Binding CourseTime}"/>
                             </GridView>

@@ -9,6 +9,9 @@ using System.Text;
 using System.Windows;
 using System.Runtime;
 using System;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace final_test
 {
@@ -22,6 +25,7 @@ namespace final_test
         List<course> courselist = new List<course>();
         List<teacher> teacherlist = new List<teacher>();
         List<print> printlist = new List<print>();
+        ListSortDirection dir = ListSortDirection.Ascending;
         int selectedclassnum=0,selectedclasspoint=0;
         public MainWindow()
         {                  
@@ -216,6 +220,7 @@ namespace final_test
 
 
         }
+        
 
         private void listView1_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -223,6 +228,20 @@ namespace final_test
             label1.Content = listView1.SelectedItem;
             
                         
+        }
+
+        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader colum = (sender as GridViewColumnHeader);
+            string sort = colum.Tag.ToString();
+           
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listView1.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription(sort,dir));
+             if (dir == ListSortDirection.Ascending)
+                dir = ListSortDirection.Descending;
+            else dir = ListSortDirection.Ascending;
+            
         }
 
         private void savebutton_Click(object sender, RoutedEventArgs e)
@@ -240,6 +259,7 @@ namespace final_test
             {
                 printlist.Add(pn);
                 csv.WriteRecords(printlist);
+                
             }
 
             printlist.Clear();
@@ -252,6 +272,7 @@ namespace final_test
         public int 已選課數{ get; set; }
         public int 已選學分數 { get; set; }
     }
+
     class record
     {
         public student selstudent { get; set; }
