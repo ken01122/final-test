@@ -191,10 +191,20 @@ namespace final_test
         }
 
         private void deletebutton_Click(object sender, RoutedEventArgs e)
-        {      
-            coursesellist.RemoveAt(listView.SelectedIndex);
-            selectedclassnum -= 1;
-            selectedclasspoint -= courselist[listView1.SelectedIndex].Point;
+        {  
+            if(listView.SelectedIndex > 0 )
+            {
+                selectedclasspoint -= coursesellist[listView.SelectedIndex].selcourse.point;
+                coursesellist.Remove(coursesellist[listView.SelectedIndex]);
+                listView.Items.Refresh();
+                selectedclassnum -= 1;
+            }
+           
+            if(listView.SelectedIndex==0)
+            {
+                listView.Items.Clear();
+            }
+            
         }
 
         private void comboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
